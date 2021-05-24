@@ -2,7 +2,7 @@ console.log("Entering script.js");
 //Define some global variables
 var lat = 60.99;
 var lon = 30.9;
-var city = "London";
+var city = "";
 // searchHistory as an array 
 var searchHistory = [];
 //api key
@@ -20,10 +20,30 @@ var currentUvEl = $('#currentUV')
 var searchBtn = $('#search')
 
 
+//create a function to retrieve search history from local storage
+function getHistory() {
+    if (localStorage.getItem('search-history')) {
+        searchHistory = JSON.parse(localStorage.getItem('search-history'));
+    }
+}
+
 //Function to push the searchHistory from user input
 //allows access to the city name when its clicked
-
-//create a function to retrieve search history from local storage
+function pushHistory() {
+    $('#history').empty();
+    getHistory();
+    if(city){
+        searchHistory.push(city);
+    }
+    searchHistory.forEach(function(element){
+        var historyBtn = $('<button>').text(element).click(function(){
+            city = element;
+            currentWeather();
+        })
+        $('#history').append(historyBtn)
+    })
+    localStorage.setItem('search-history', JSON.stringify(searchHistory));
+}
 
 //function to display the current weather data and append information the the page
 function currentWeather() {
@@ -57,34 +77,37 @@ function currentWeather() {
 //create variables to grab api response to be able to insert api data into second api
 
 //function to get UV index and render to page
-function getUVIndex(url){
+function getUVIndex(url) {
     fetch(url)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function (response){
-        console.log(response);
-        currentUvEl.text(response.current.uvi);
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response);
+            currentUvEl.text(response.current.uvi);
+        });
 }
 
 //create a handler to check search field and return data, if no data is in search field return;
-function searchFieldHandler(){
-    if($('#city').val()){
+function searchFieldHandler() {
+    if ($('#city').val()) {
         return $('#city').val();
     }
-    else{
+    else {
         return;
     }
 }
 
-searchBtn.click(function(){
-    if(searchFieldHandler()){
+searchBtn.click(function () {
+    if (searchFieldHandler()) {
         city = searchFieldHandler();
+        pushHistory();
         console.log(city);
         currentWeather();
     }
-    else{
+    else {
         console.log("No input");
     }
 });
+
+pushHistory();
