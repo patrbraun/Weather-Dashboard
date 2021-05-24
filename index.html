@@ -9,10 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <title>
-
-
-  </title>
+  <title>Weather Dashboard</title>
 </head>
 
 <body>
@@ -21,6 +18,8 @@
   </div>
   <div class="row">
     <div class="container col-md-3">
+      <input type="text" id="city" name="city">
+      <button id="search">Search</button>
       Column 1
     </div>
     <div class="container col-md-9  ">
@@ -29,10 +28,10 @@
         <h1 id="currentName"></h1>
         <h2 id="currentDate"></h2>
         <p id="currentIcon"></p>
-        <p>Temperature: <span id = currentTemp></span></p>
-        <p>Humidity: <span id = currentHum></span></p>
-        <p>Wind speed: <span id = currentWind></span></p>
-        <p>UV Index: <span id = currentUV></span></p>
+        <p>Temperature(Celsius): <span id=currentTemp></span></p>
+        <p>Humidity: <span id=currentHum></span></p>
+        <p>Wind speed: <span id=currentWind></span></p>
+        <p>UV Index: <span id=currentUV></span></p>
       </div>
       <div class="row" id="fiveDay">
         Five day forecast

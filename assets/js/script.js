@@ -4,13 +4,21 @@ var lat = 60.99;
 var lon = 30.9;
 var city = "London";
 // searchHistory as an array 
+var searchHistory = [];
 //api key
 var apiKey = "f79264eb8fdf015d3fa45a9a4e917dba"
 //api url
 var coordUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
 var nameUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 //Reference DOM elements 
-//var searchForm = $(""); etc
+var currentNameEl = $('#currentName');
+var currentDateEl = $('#currentDate');
+var currentTempEl = $('#currentTemp');
+var currentHumEl = $('#currentHum');
+var currentWindEl = $('#currentWind');
+var currentUvEl = $('#currentUV')
+var searchBtn = $('#search')
+
 
 //Function to push the searchHistory from user input
 //allows access to the city name when its clicked
@@ -18,7 +26,8 @@ var nameUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&ap
 //create a function to retrieve search history from local storage
 
 //function to display the current weather data and append information the the page
-function currentWeather(url) {
+function currentWeather() {
+    var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
     console.log(url);
     fetch(url)
         .then(function (response) {
@@ -27,13 +36,13 @@ function currentWeather(url) {
         .then(function (response) {
             console.log(response);
             //Dispay current weather data 
-            $('#currentName').text(response.name);
-            $('#currentDate').text(moment.unix(response.dt).format("MMMM/DD/YYYY"));
+            currentNameEl.text(response.name);
+            currentDateEl.text(moment.unix(response.dt).format("MMMM/DD/YYYY"));
             //TODO icon display
             //
-            $('#currentTemp').text(response.main.temp);
-            $('#currentHum').text(response.main.humidity);
-            $('#currentWind').text(response.wind.speed);
+            currentTempEl.text((response.main.temp - 273.15).toFixed(2));
+            currentHumEl.text(response.main.humidity);
+            currentWindEl.text(response.wind.speed);
             //TODO UV index
             lat = response.coord.lat;
             lon = response.coord.lon;
@@ -55,10 +64,27 @@ function getUVIndex(url){
     })
     .then(function (response){
         console.log(response);
-        $('#currentUV').text(response.current.uvi);
+        currentUvEl.text(response.current.uvi);
     });
 }
 
-//create a handler to check serach field and return data, if no data is in search field return;
+//create a handler to check search field and return data, if no data is in search field return;
+function searchFieldHandler(){
+    if($('#city').val()){
+        return $('#city').val();
+    }
+    else{
+        return;
+    }
+}
 
-currentWeather(nameUrl);
+searchBtn.click(function(){
+    if(searchFieldHandler()){
+        city = searchFieldHandler();
+        console.log(city);
+        currentWeather();
+    }
+    else{
+        console.log("No input");
+    }
+});
