@@ -23,9 +23,16 @@
     <div class="container col-md-3">
       Column 1
     </div>
-    <div class="container col-md-9">
-      <div class="row" id="currentWeather">
-        Current Weather data
+    <div class="container col-md-9  ">
+      <div class="row d-flex flex-column" id="currentWeather">
+        Current Weather data for:
+        <h1 id="currentName"></h1>
+        <h2 id="currentDate"></h2>
+        <p id="currentIcon"></p>
+        <p>Temperature: <span id = currentTemp></span></p>
+        <p>Humidity: <span id = currentHum></span></p>
+        <p>Wind speed: <span id = currentWind></span></p>
+        <p>UV Index: <span id = currentUV></span></p>
       </div>
       <div class="row" id="fiveDay">
         Five day forecast
@@ -36,6 +43,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 

@@ -26,6 +26,15 @@ function currentWeather(url) {
         })
         .then(function (response) {
             console.log(response);
+            //Dispay current weather data 
+            $('#currentName').text(response.name);
+            $('#currentDate').text(moment.unix(response.dt).format("MMMM/DD/YYYY"));
+            //TODO icon display
+            //
+            $('#currentTemp').text(response.main.temp);
+            $('#currentHum').text(response.main.humidity);
+            $('#currentWind').text(response.wind.speed);
+            //TODO UV index
             lat = response.coord.lat;
             lon = response.coord.lon;
             console.log(lat + " " + lon);
@@ -46,6 +55,7 @@ function getUVIndex(url){
     })
     .then(function (response){
         console.log(response);
+        $('#currentUV').text(response.current.uvi);
     });
 }
 
