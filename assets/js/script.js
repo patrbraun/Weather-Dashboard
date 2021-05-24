@@ -32,11 +32,11 @@ function getHistory() {
 function pushHistory() {
     $('#history').empty();
     getHistory();
-    if(city){
+    if (city) {
         searchHistory.push(city);
     }
-    searchHistory.forEach(function(element){
-        var historyBtn = $('<button>').text(element).click(function(){
+    searchHistory.forEach(function (element) {
+        var historyBtn = $('<button>').text(element).click(function () {
             city = element;
             currentWeather();
         })
@@ -73,9 +73,6 @@ function currentWeather() {
 }
 
 
-//create second api call to retrieve the 5 day forcast
-//create variables to grab api response to be able to insert api data into second api
-
 //function to get UV index and render to page
 function getUVIndex(url) {
     fetch(url)
@@ -85,6 +82,16 @@ function getUVIndex(url) {
         .then(function (response) {
             console.log(response);
             currentUvEl.text(response.current.uvi);
+            console.log(document.getElementById('day-0').children[2]);
+            //Create five day forecast
+            for (i = 0; i < 5; i++) {
+                var card = "day-" + i;
+                document.getElementById(card).children[0].innerHTML= moment.unix(response.daily[i].dt).format("MMMM/DD/YYYY");
+                document.getElementById(card).children[1].innerHTML="Icon";
+                document.getElementById(card).children[2].innerHTML= "Temp: " + (response.daily[i].temp.day - 273.15).toFixed(2) + " C";
+                document.getElementById(card).children[3].innerHTML= "Humididty: " + response.daily[i].humidity + "%";
+                document.getElementById(card).children[4].innerHTML= "Wind Speed: " + response.daily[i].wind_speed + " metre/sec";
+            }
         });
 }
 
