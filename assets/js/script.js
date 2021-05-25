@@ -18,6 +18,7 @@ var currentHumEl = $('#currentHum');
 var currentWindEl = $('#currentWind');
 var currentUvEl = $('#currentUV')
 var searchBtn = $('#search')
+var currentIcon = $('#currentIcon');
 
 
 //create a function to retrieve search history from local storage
@@ -58,15 +59,16 @@ function currentWeather() {
             //Dispay current weather data 
             currentNameEl.text(response.name);
             currentDateEl.text(moment.unix(response.dt).format("MMMM/DD/YYYY"));
-            //TODO icon display
-            //
+            var iconUrl = "http://openweathermap.org/img/wn/"+ response.weather[0].icon +".png";
+            console.log(iconUrl);
+            currentIcon.attr("src", iconUrl);
+
             currentTempEl.text((response.main.temp - 273.15).toFixed(2));
             currentHumEl.text(response.main.humidity);
             currentWindEl.text(response.wind.speed);
             //TODO UV index
             lat = response.coord.lat;
             lon = response.coord.lon;
-            console.log(lat + " " + lon);
             coordUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
             getUVIndex(coordUrl);
         });
@@ -82,12 +84,12 @@ function getUVIndex(url) {
         .then(function (response) {
             console.log(response);
             currentUvEl.text(response.current.uvi);
-            console.log(document.getElementById('day-0').children[2]);
             //Create five day forecast
             for (i = 0; i < 5; i++) {
                 var card = "day-" + i;
                 document.getElementById(card).children[0].innerHTML= moment.unix(response.daily[i].dt).format("MMMM/DD/YYYY");
-                document.getElementById(card).children[1].innerHTML="Icon";
+                var fiveIconUrl = "http://openweathermap.org/img/wn/"+ response.daily[i].weather[0].icon +".png";
+                document.getElementById(card).children[1].children[0].src= fiveIconUrl;
                 document.getElementById(card).children[2].innerHTML= "Temp: " + (response.daily[i].temp.day - 273.15).toFixed(2) + " C";
                 document.getElementById(card).children[3].innerHTML= "Humididty: " + response.daily[i].humidity + "%";
                 document.getElementById(card).children[4].innerHTML= "Wind Speed: " + response.daily[i].wind_speed + " metre/sec";
