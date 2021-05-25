@@ -17,6 +17,7 @@ var currentTempEl = $('#currentTemp');
 var currentHumEl = $('#currentHum');
 var currentWindEl = $('#currentWind');
 var currentUvEl = $('#currentUV')
+var currentUvIcon = $('#uvColor');
 var searchBtn = $('#search')
 var currentIcon = $('#currentIcon');
 
@@ -83,6 +84,19 @@ function getUVIndex(url) {
         })
         .then(function (response) {
             console.log(response);
+            var uvIndex = response.current.uvi;
+            currentUvIcon.css("color","white")
+            if(uvIndex <= 2){
+                currentUvIcon.css("background-color","green").text("Low");
+            }else if(uvIndex <= 5){
+                currentUvIcon.css("background-color","yellow").text("Moderate");
+            }else if(uvIndex <= 7){
+                currentUvIcon.css("background-color","orange").text("High");
+            }else if(uvIndex <= 10){
+                currentUvIcon.css("background-color","red").text("Very High");
+            }else{
+                currentUvIcon.css("background-color","violet").text("Extreme");
+            }
             currentUvEl.text(response.current.uvi);
             //Create five day forecast
             for (i = 0; i < 5; i++) {
