@@ -25,12 +25,12 @@
     </div>
     <div class="container col-md-10">
       <!-- Current Weather -->
-      <div class="row d-flex m-1 bg-info rounded" id="currentWeather">
-        <div class="col">
+      <div class="row d-flex flex-wrap m-1 bg-info rounded" id="currentWeather">
+        <section class="pr-5">
           <h1 id="currentName"></h1>
           <h2 id="currentDate"></h2>
-        </div>
-        <div class="col">
+        </section>
+        <section>
           <div>
             <img src="#" alt="Weather Icon" id="currentIcon">
           </div>
@@ -38,7 +38,7 @@
           <p>Humidity: <span id=currentHum></span>%</p>
           <p>Wind speed: <span id=currentWind></span> metre/sec</p>
           <p>UV Index: <span id=currentUV></span> <span id="uvColor"></span></p>
-        </div>
+        </section>
       </div>
       <!-- FIVE DAY -->
       <div class="row m-1 bg-info rounded" id="fiveDay">
