@@ -12,33 +12,37 @@
   <title>Weather Dashboard</title>
 </head>
 
-<body>
-  <div class="row justify-content-center">
-    Weather Dashboard
+<body class="bg-dark">
+  <div class="row justify-content-center bg-primary">
+    <h1>Weather Dashboard</h1>
   </div>
   <div class="row">
-    <div class="container col-md-2">
+    <!-- Search -->
+    <div class="container col-md-2 pt-1">
       <input type="text" id="city" name="city">
       <button id="search">Search</button>
-      <div id="history" class="d-flex flex-column">
-
-      </div>
+      <div id="history" class="d-flex flex-column"></div>
     </div>
-    <div class="container col-md-10  ">
-      <div class="row d-flex flex-column" id="currentWeather">
-        Current Weather data for:
-        <h1 id="currentName"></h1>
-        <h2 id="currentDate"></h2>
-        <div>
-          <img src="#" alt="Weather Icon" id="currentIcon">
+    <div class="container col-md-10">
+      <!-- Current Weather -->
+      <div class="row d-flex m-1 bg-info rounded" id="currentWeather">
+        <div class="col">
+          <h1 id="currentName"></h1>
+          <h2 id="currentDate"></h2>
         </div>
-        <p>Temperature: <span id=currentTemp></span> C</p>
-        <p>Humidity: <span id=currentHum></span>%</p>
-        <p>Wind speed: <span id=currentWind></span> metre/sec</p>
-        <p>UV Index: <span id=currentUV></span> <span id="uvColor"></span></p>
+        <div class="col">
+          <div>
+            <img src="#" alt="Weather Icon" id="currentIcon">
+          </div>
+          <p>Temperature: <span id=currentTemp></span> C</p>
+          <p>Humidity: <span id=currentHum></span>%</p>
+          <p>Wind speed: <span id=currentWind></span> metre/sec</p>
+          <p>UV Index: <span id=currentUV></span> <span id="uvColor"></span></p>
+        </div>
       </div>
-      <div class="row" id="fiveDay">
-        <section id="day-0" class="m-2 border rounded">
+      <!-- FIVE DAY -->
+      <div class="row m-1 bg-info rounded" id="fiveDay">
+        <section id="day-0" class="five-day-card m-2 rounded">
           <h3>Date</h3>
           <div>
             <img src="#" alt="Weather Icon" id="currentIcon">
@@ -47,7 +51,7 @@
           <p>Humidity</p>
           <p>Wind</p>
         </section>
-        <section id="day-1" class="m-2 border rounded">
+        <section id="day-1" class="five-day-card m-2 rounded">
           <h3>Date</h3>
           <div>
             <img src="#" alt="Weather Icon" id="currentIcon">
@@ -56,7 +60,7 @@
           <p>Humidity</p>
           <p>Wind</p>
         </section>
-        <section id="day-2" class="m-2 border rounded">
+        <section id="day-2" class="five-day-card m-2 rounded">
           <h3>Date</h3>
           <div>
             <img src="#" alt="Weather Icon" id="currentIcon">
@@ -65,7 +69,7 @@
           <p>Humidity</p>
           <p>Wind</p>
         </section>
-        <section id="day-3" class="m-2 border rounded">
+        <section id="day-3" class="five-day-card m-2 rounded">
           <h3>Date</h3>
           <div>
             <img src="#" alt="Weather Icon" id="currentIcon">
@@ -74,7 +78,7 @@
           <p>Humidity</p>
           <p>Wind</p>
         </section>
-        <section id="day-4" class="m-2 border rounded">
+        <section id="day-4" class="five-day-card m-2 rounded">
           <h3>Date</h3>
           <div>
             <img src="#" alt="Weather Icon" id="currentIcon">

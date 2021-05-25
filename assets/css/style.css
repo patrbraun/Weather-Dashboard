@@ -1,7 +1,10 @@
 .row{
-    border: 1px solid black
+    /* border: 1px solid black */
 }
 
 .container{
-    border: 1px solid blue
+    /* border: 1px solid blue */
+}
+.five-day-card{
+    background-color: gray;
 }
